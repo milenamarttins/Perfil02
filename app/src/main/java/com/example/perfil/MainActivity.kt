@@ -8,9 +8,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -19,9 +24,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,15 +55,40 @@ class MainActivity : ComponentActivity() {
     }
     @Composable
     fun Rodape() {
-        Column() {
-            Contato()
-            Contato()
-            Contato()
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(10.dp),
+            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Contato(
+                painter = painterResource(id =  R.drawable.telefone),
+                text = "MILENA"
+            )
+            Contato(
+                painter  = painterResource(id =  R.drawable.telefone),
+                text = "11 94077-6073"
+            )
+            Contato(
+                painter = painterResource(id =  R.drawable.telefone),
+                text = "11 94077-6073"
+            )
         }
     }
     private @Composable
-    fun Contato() {
-        Row {
+    fun Contato(painter: Painter, text:String) {
+
+        Divider(
+            color = Color.Blue,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(0.5.dp)
+        )
+        Row (
+            modifier= Modifier
+                .padding(top = 10.dp, start = 30.dp)
+                ) {
             Image(
                 painter = painterResource(id = R.drawable.telefone),
                 contentDescription = null,
@@ -63,7 +96,10 @@ class MainActivity : ComponentActivity() {
                     .size(25.dp)
             )
             Text(
-                text = "11 94077-6073",
+                text = text,
+                fontSize = 25.sp,
+                color = Color.LightGray,
+                textAlign = TextAlign.Left,
             )
         }
     }
@@ -84,7 +120,7 @@ fun Cabecalho() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Image(painter = painterResource(R.drawable.icone1) ,
+        Image(painter = painterResource(R.drawable.icone2) ,
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
